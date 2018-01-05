@@ -1,5 +1,5 @@
 //
-// Created by robosense on 2018-01-05.
+// Created by g on 2018-01-05.
 // @TODO 文件加锁
 //
 
@@ -54,6 +54,7 @@ int main(int argc, char **argv)
   }
   parse_argument (argc, argv, "-psize", default_psize);
   parse_argument (argc, argv, "-ptype", default_ptype);
+
   vector<int> p_file_indices;
   p_file_indices = parse_file_extension_argument (argc, argv, ".pcd");
 

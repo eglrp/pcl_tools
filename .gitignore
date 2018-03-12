@@ -23,7 +23,8 @@ build/
 .pydevproject
 .settings/
 
-
+#vscode
+.vscode
 
 # CLion
 .idea/

@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-Project(pcl_tools)
-SET(CMAKE_C_COMPILER g++)
+set(CMAKE_BUILD_TYPE Release CACHE STRING "set build type to Release")
+#set(CMAKE_BUILD_TYPE Debug CACHE STRING "set build type to debug")
+Project(rs_tools)
+SET(CMAKE_C_COMPILER clang++) #g++
 add_compile_options(-std=c++11)
-set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "set build type to RelWithDebInfo")
+add_definitions(-w)
 #set(CMAKE_BUILD_TYPE debug  GCACHE STRING "set build type to debug")
 # PCL
 find_package(PCL 1.8 REQUIRED)
@@ -14,6 +16,7 @@ add_definitions(${PCL_DEFINITIONS})
 find_package(OpenCV 2 REQUIRED)
 
 include_directories(include)
+include_directories("/usr/include/eigen3")
 # Head files
 #set(HEAD_FILES
 #    include/map_feature.h
@@ -27,7 +30,7 @@ include_directories(include)
 set( CMAKE_INSTALL_PREFIX "/usr/local/" )
 set(VERSION "1.0.1")
 set(CPACK_PACKAGE_VERSION ${VERSION})
-set(CPACK_PACKAGE_NAME "pcl_tools")
+set(CPACK_PACKAGE_NAME "rs_tools")
 set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_PACKAGE_RELEASE 1)
 set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
@@ -57,12 +60,20 @@ target_link_libraries(rs_pcd_merge  ${PCL_LIBRARIES})
 add_executable(rs_normal_estimation  tools/normal_estimation.cpp )
 target_link_libraries(rs_normal_estimation  ${PCL_LIBRARIES})
 
+add_executable(qua_euler_demo  tools/qua_euler.cpp )
+target_link_libraries(qua_euler_demo  ${PCL_LIBRARIES})
+
 
 add_executable(rs_pca_estimation  tools/pca_estimation.cpp )
 target_link_libraries(rs_pca_estimation  ${PCL_LIBRARIES})
 
-
-########安装脚本##########
+#---------------gtest-----------------
+set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} /usr /usr/local)
+enable_testing()
+find_path(GTEST_INCLUDE_DIR gtest/gtest.h)
+add_executable(rs_test test/test.cpp ${GTEST_INCLUDE_DIR} )
+target_link_libraries(rs_test rs_proprogress /usr/local/lib/libgtest.a -pthread )
+#------------install shell-------------
 
 install (TARGETS
 				 rs_pcd2xyz

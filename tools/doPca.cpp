@@ -1,13 +1,9 @@
-//
-// Created by robosense on 2018-1-4
-//
-
 /**
- * @file don_segmentation.cpp
- * Difference of Normals Example for PCL Segmentation Tutorials.
+ * @file doPca.cpp
+ * Difference of PCA demo.
  *
- * @author Yani Ioannou
- * @date 2012-09-24
+ * @author GuoLeiming
+ * @date 2018-1-4
  */
 #include <string>
 #include <pcl/common/random.h>
@@ -40,7 +36,7 @@ printHelp (int, char **argv)
 {
   print_error ("Syntax is: %s input_normal_small.pcd input_normal_small.pcd  <options> [optional_arguments]\n", argv[0]);
   print_info ("  where options are:\n");
-  print_info ("                     -threshold X = threshold for DoN magnitude (default: ");
+  print_info ("                     -thd X = threshold for DoN magnitude (default: ");
   print_value ("%f", threshold); print_info (")\n");
 }
 
@@ -52,7 +48,7 @@ main (int argc, char *argv[])
     printHelp (argc, argv);
     exit (EXIT_FAILURE);
   }
-  parse_argument (argc, argv, "-threshold", threshold);
+  parse_argument (argc, argv, "-thd", threshold);
   pcl::PointCloud<PointNormal>::Ptr normals_small_scale (new pcl::PointCloud<PointNormal>);
   pcl::PointCloud<PointNormal>::Ptr normals_large_scale (new pcl::PointCloud<PointNormal>);
 

@@ -30,7 +30,8 @@ build/
 .idea/
 cmake-build-*/
 
-
+#vs code 
+.vscode/
 
 # clang-format
 .clang-format
